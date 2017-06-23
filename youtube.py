@@ -7,13 +7,12 @@
 # @Software: PyCharm Community Edition
 
 from __future__ import unicode_literals
-import sys, os
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 import youtube_dl
 from concurrent.futures import ThreadPoolExecutor
-
 
 def load_all_more_button(browser):
     while True:
@@ -60,10 +59,10 @@ def extract_links(page):
 
 class MyLogger(object):
     def debug(self, msg):
-        pass
+        print(msg)
 
     def warning(self, msg):
-        pass
+        print(msg)
 
     def error(self, msg):
         print(msg)
@@ -78,6 +77,7 @@ def my_hook(d):
 
 def download_and_convert(links, output_template=None, hook=None, logger=None):
     ydl_opts = {
+        'proxy': 'socks5://127.0.0.1:1086',
         'format': 'bestaudio/best',
         'nocheckcertificate': True,
         'postprocessors': [{
